@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public GameObject gameWonPanel;
     public GameObject pausedPanel;
     public GameObject gameLostPanel;
+    public GameObject startGame;
 
     public float speed;
     private bool levelStatus;
@@ -26,18 +27,22 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetAxis("Horizontal") > 0)
             {
+                rigidbody2D.SetRotation(-90);
                 rigidbody2D.velocity = new Vector2(speed, 0f);
             }
             else if (Input.GetAxis("Horizontal") < 0)
             {
+                rigidbody2D.SetRotation(90);
                 rigidbody2D.velocity = new Vector2(-speed, 0f);
             }
             else if (Input.GetAxis("Vertical") > 0)
             {
+                rigidbody2D.SetRotation(0);
                 rigidbody2D.velocity = new Vector2(0f, speed);
             }
             else if (Input.GetAxis("Vertical") < 0)
             {
+                rigidbody2D.SetRotation(180);
                 rigidbody2D.velocity = new Vector2(0f, -speed);
             }
             else if (Input.GetAxis("Cancel") > 0)
@@ -78,5 +83,15 @@ public class PlayerController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void NextLevel()
+    {
+        Debug.Log("Next Level");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
 
+    public void StartGame()
+    {
+        Debug.Log("Game Started");
+        startGame.SetActive(false);
+    }
 }
